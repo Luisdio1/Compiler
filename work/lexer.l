@@ -21,6 +21,7 @@
 #define T_while     1017
 #define T_id        1018
 #define T_num       1019
+#define T_spacers   1020
 
 int lineno = 1;
 %}
@@ -30,6 +31,7 @@ delim       [ \t\n]
 ws          {delim}+
 l           [a-zA-Z]
 d           [0-9]
+spacers     [()[]{},;:<-]
 %%
 
 "and"                       { return T_and; }
@@ -49,11 +51,12 @@ d           [0-9]
 "then"                      { return T_then; }
 "var"                       { return T_var; }
 "while"                     { return T_while; }
+[():{}]                     { return T_spacers; }
 
 [=+\-*/()]                  { return yytext[0]; }
 
-^[a-zA-Z][a-zA-Z0-9_]*$     { return T_id; }
-^[0-9]+$                    { return T_num; }
+{l}[a-zA-Z0-9_]*            { return T_id; }
+{d}+                        { return T_num; }
 
 \n                          { lineno++; }
 {ws}                        {}
