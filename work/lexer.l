@@ -28,30 +28,38 @@ int lineno = 1;
 
 delim       [ \t\n]
 ws          {delim}+
-l           [A-Za-z]
+l           [a-zA-Z]
 d           [0-9]
 %%
 
-"if"            { return T_if; }
-"then"          { return T_then; }
-"else"          { return T_else; }
-"begin"         { return T_begin; }
-"end"           { return T_end;  }
-"for"           { return T_for; }
-"do"            { return T_do; }
-"print"         { return T_print; }
-"let"           { return T_let; }
+"and"                       { return T_and; }
+"char"                      { return T_char; }
+"div"                       { return T_div; }
+"do"                        { return T_do; }
+"else"                      { return T_else;  }
+"fun"                       { return T_fun; }
+"if"                        { return T_if; }
+"int"                       { return T_int; }
+"mod"                       { return T_mod; }
+"not"                       { return T_not; }
+"nothing"                   { return T_nothing; }
+"or"                        { return T_or; }
+"ref"                       { return T_ref; }
+"return"                    { return T_return; }
+"then"                      { return T_then; }
+"var"                       { return T_var; }
+"while"                     { return T_while; }
 
-[=+\-*/()]      { return yytext[0]; }
+[=+\-*/()]                  { return yytext[0]; }
 
-{l}+            { return T_id; }
-{d}+            { return T_num; }
+^[a-zA-Z][a-zA-Z0-9_]*$     { return T_id; }
+^[0-9]+$                    { return T_num; }
 
-\n              { lineno++; }
-{ws}            {}
-\'.*\n          {}
+\n                          { lineno++; }
+{ws}                        {}
+\'.*\n                      {}
 
-.               { printf("Erroe Illegal character: %s (line %d)\n", yytext , lineno); exit(1); }
+.                           { printf("Erroe Illegal character: %s (line %d)\n", yytext , lineno); exit(1); }
 
 %%
 
