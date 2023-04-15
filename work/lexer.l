@@ -22,16 +22,20 @@
 #define T_id        1018
 #define T_num       1019
 #define T_spacers   1020
+#define T_string    1021
+#define T_character 1022
+#define T_symb_oper 1023
 
 int lineno = 1;
 %}
 %option noyywrap
 
-delim       [ \t\n]
+delim       [ \t\n\r]
 ws          {delim}+
 l           [a-zA-Z]
 d           [0-9]
-spacers     [()[]{},;:<-]
+
+%x COMMENT
 %%
 
 "and"                       { return T_and; }
@@ -51,16 +55,29 @@ spacers     [()[]{},;:<-]
 "then"                      { return T_then; }
 "var"                       { return T_var; }
 "while"                     { return T_while; }
-[():{}]                     { return T_spacers; }
 
-[=+\-*/()]                  { return yytext[0]; }
+[():{};\[\],]               { return T_spacers; }
+"<-"                        { return T_spacers; }
+
+\"(\\.|[^\n"\\])*\"         { return T_string; }
+\'(\\.|[^\n'\\])\'?         { return T_character; }
+
+"<>"                        { return T_symb_oper; }
+"<="                        { return T_symb_oper; }
+">="                        { return T_symb_oper; }
+[=+\-*/()><#]               { return T_symb_oper; }
 
 {l}[a-zA-Z0-9_]*            { return T_id; }
 {d}+                        { return T_num; }
 
 \n                          { lineno++; }
 {ws}                        {}
-\'.*\n                      {}
+
+"\\\$\\\$"                      { BEGIN(COMMENT); printf("Started COMMENT\n"); }
+<COMMENT>\\\$\\\$               { BEGIN(INITIAL); }
+<COMMENT>.                  { }
+<COMMENT>\n                 { lineno++; }
+\\$.*\n                    {printf("Simple comment\n");}
 
 .                           { printf("Erroe Illegal character: %s (line %d)\n", yytext , lineno); exit(1); }
 
