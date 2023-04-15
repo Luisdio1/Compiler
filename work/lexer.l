@@ -36,6 +36,7 @@ l           [a-zA-Z]
 d           [0-9]
 
 %x COMMENT
+%x SINGLE_COMMENT
 %%
 
 "and"                       { return T_and; }
@@ -73,11 +74,14 @@ d           [0-9]
 \n                          { lineno++; }
 {ws}                        {}
 
-"\\\$\\\$"                      { BEGIN(COMMENT); printf("Started COMMENT\n"); }
+\\\$\\\$                      { BEGIN(COMMENT); printf("Started COMMENT\n"); }
 <COMMENT>\\\$\\\$               { BEGIN(INITIAL); }
 <COMMENT>.                  { }
 <COMMENT>\n                 { lineno++; }
-\\$.*\n                    {printf("Simple comment\n");}
+
+\\\$                        {BEGIN(SINGLE_COMMENT); printf("Started SINGLE_COMMENT\n");}
+<SINGLE_COMMENT>\n          {BEGIN(INITIAL);}
+<SINGLE_COMMENT>.           {}
 
 .                           { printf("Erroe Illegal character: %s (line %d)\n", yytext , lineno); exit(1); }
 
