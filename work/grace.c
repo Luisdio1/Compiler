@@ -963,7 +963,7 @@ case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
 #line 75 "grace_lexer.l"
-{}
+{ }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
@@ -989,23 +989,23 @@ YY_RULE_SETUP
 case 34:
 YY_RULE_SETUP
 #line 82 "grace_lexer.l"
-{BEGIN(SINGLE_COMMENT); printf("Started SINGLE_COMMENT\n");}
+{ BEGIN(SINGLE_COMMENT); printf("Started SINGLE_COMMENT\n"); }
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
 #line 83 "grace_lexer.l"
-{BEGIN(INITIAL);}
+{ BEGIN(INITIAL); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 84 "grace_lexer.l"
-{}
+{ }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 86 "grace_lexer.l"
-{ printf("Erroe Illegal character: %s (line %d)\n", yytext , lineno); exit(1); }
+{ printf("Error illegal character: %s (line %d)\n", yytext, lineno); exit(1); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
@@ -2022,13 +2022,12 @@ void yyfree (void * ptr )
 #line 88 "grace_lexer.l"
 
 
-int main() {
-    int tok = yylex();
+// int main() {
+//     int tok = yylex();
 
-    while (tok != T_eof) {
-        printf("token = %d, lexeme = %s \n", tok, yytext);
-        tok = yylex();
-    }
-    return 0;
-}
-
+//     while (tok != T_eof) {
+//         printf("token = %d, lexeme = %s \n", tok, yytext);
+//         tok = yylex();
+//     }
+//     return 0;
+// }

@@ -72,27 +72,27 @@ d           [0-9]
 {d}+                        { return T_num; }
 
 \n                          { lineno++; }
-{ws}                        {}
+{ws}                        { }
 
-\\\$\\\$                      { BEGIN(COMMENT); printf("Started COMMENT\n"); }
-<COMMENT>\\\$\\\$               { BEGIN(INITIAL); }
+\\\$\\\$                    { BEGIN(COMMENT); printf("Started COMMENT\n"); }
+<COMMENT>\\\$\\\$           { BEGIN(INITIAL); }
 <COMMENT>.                  { }
 <COMMENT>\n                 { lineno++; }
 
-\\\$                        {BEGIN(SINGLE_COMMENT); printf("Started SINGLE_COMMENT\n");}
-<SINGLE_COMMENT>\n          {BEGIN(INITIAL);}
-<SINGLE_COMMENT>.           {}
+\\\$                        { BEGIN(SINGLE_COMMENT); printf("Started SINGLE_COMMENT\n"); }
+<SINGLE_COMMENT>\n          { BEGIN(INITIAL); }
+<SINGLE_COMMENT>.           { }
 
-.                           { printf("Erroe Illegal character: %s (line %d)\n", yytext , lineno); exit(1); }
+.                           { printf("Error illegal character: %s (line %d)\n", yytext, lineno); exit(1); }
 
 %%
 
-int main() {
-    int tok = yylex();
+// int main() {
+//     int tok = yylex();
 
-    while (tok != T_eof) {
-        printf("token = %d, lexeme = %s \n", tok, yytext);
-        tok = yylex();
-    }
-    return 0;
-}
+//     while (tok != T_eof) {
+//         printf("token = %d, lexeme = %s \n", tok, yytext);
+//         tok = yylex();
+//     }
+//     return 0;
+// }
