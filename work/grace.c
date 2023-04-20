@@ -510,36 +510,37 @@ char *yytext;
 #line 1 "grace_lexer.l"
 #line 2 "grace_lexer.l"
 #include <stdio.h>
+#include "grace_parser.tab.h"
 
-#define T_eof       0
-#define T_and       1001
-#define T_char      1002
-#define T_div       1003
-#define T_do        1004
-#define T_else      1005
-#define T_fun       1006
-#define T_if        1007
-#define T_int       1008
-#define T_mod       1009
-#define T_not       1010
-#define T_nothing   1011
-#define T_or        1012
-#define T_ref       1013
-#define T_return    1014
-#define T_then      1015
-#define T_var       1016
-#define T_while     1017
-#define T_id        1018
-#define T_num       1019
-#define T_spacers   1020
-#define T_string    1021
-#define T_character 1022
-#define T_symb_oper 1023
+// #define T_eof       0
+// #define T_and       1001
+// #define T_char      1002
+// #define T_div       1003
+// #define T_do        1004
+// #define T_else      1005
+// #define T_fun       1006
+// #define T_if        1007
+// #define T_int       1008
+// #define T_mod       1009
+// #define T_not       1010
+// #define T_nothing   1011
+// #define T_or        1012
+// #define T_ref       1013
+// #define T_return    1014
+// #define T_then      1015
+// #define T_var       1016
+// #define T_while     1017
+// #define T_id        1018
+// #define T_num       1019
+// #define T_spacers   1020
+// #define T_string    1021
+// #define T_character 1022
+// #define T_symb_oper 1023
 
 int lineno = 1;
-#line 541 "grace.c"
+#line 542 "grace.c"
 
-#line 543 "grace.c"
+#line 544 "grace.c"
 
 #define INITIAL 0
 #define COMMENT 1
@@ -758,10 +759,10 @@ YY_DECL
 		}
 
 	{
-#line 40 "grace_lexer.l"
+#line 41 "grace_lexer.l"
 
 
-#line 765 "grace.c"
+#line 766 "grace.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -820,199 +821,199 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 42 "grace_lexer.l"
+#line 43 "grace_lexer.l"
 { return T_and; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 43 "grace_lexer.l"
+#line 44 "grace_lexer.l"
 { return T_char; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 44 "grace_lexer.l"
+#line 45 "grace_lexer.l"
 { return T_div; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "grace_lexer.l"
+#line 46 "grace_lexer.l"
 { return T_do; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 46 "grace_lexer.l"
+#line 47 "grace_lexer.l"
 { return T_else;  }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 47 "grace_lexer.l"
+#line 48 "grace_lexer.l"
 { return T_fun; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 48 "grace_lexer.l"
+#line 49 "grace_lexer.l"
 { return T_if; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 49 "grace_lexer.l"
+#line 50 "grace_lexer.l"
 { return T_int; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 50 "grace_lexer.l"
+#line 51 "grace_lexer.l"
 { return T_mod; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 51 "grace_lexer.l"
+#line 52 "grace_lexer.l"
 { return T_not; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 52 "grace_lexer.l"
+#line 53 "grace_lexer.l"
 { return T_nothing; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 53 "grace_lexer.l"
+#line 54 "grace_lexer.l"
 { return T_or; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 54 "grace_lexer.l"
+#line 55 "grace_lexer.l"
 { return T_ref; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 55 "grace_lexer.l"
+#line 56 "grace_lexer.l"
 { return T_return; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 56 "grace_lexer.l"
+#line 57 "grace_lexer.l"
 { return T_then; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 57 "grace_lexer.l"
+#line 58 "grace_lexer.l"
 { return T_var; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 58 "grace_lexer.l"
+#line 59 "grace_lexer.l"
 { return T_while; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 60 "grace_lexer.l"
+#line 61 "grace_lexer.l"
 { return T_spacers; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 61 "grace_lexer.l"
+#line 62 "grace_lexer.l"
 { return T_spacers; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 63 "grace_lexer.l"
+#line 64 "grace_lexer.l"
 { return T_string; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 64 "grace_lexer.l"
+#line 65 "grace_lexer.l"
 { return T_character; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 66 "grace_lexer.l"
+#line 67 "grace_lexer.l"
 { return T_symb_oper; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 67 "grace_lexer.l"
+#line 68 "grace_lexer.l"
 { return T_symb_oper; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 68 "grace_lexer.l"
+#line 69 "grace_lexer.l"
 { return T_symb_oper; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 69 "grace_lexer.l"
+#line 70 "grace_lexer.l"
 { return T_symb_oper; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 71 "grace_lexer.l"
+#line 72 "grace_lexer.l"
 { return T_id; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 72 "grace_lexer.l"
+#line 73 "grace_lexer.l"
 { return T_num; }
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 74 "grace_lexer.l"
+#line 75 "grace_lexer.l"
 { lineno++; }
 	YY_BREAK
 case 29:
 /* rule 29 can match eol */
 YY_RULE_SETUP
-#line 75 "grace_lexer.l"
+#line 76 "grace_lexer.l"
 { }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 77 "grace_lexer.l"
+#line 78 "grace_lexer.l"
 { BEGIN(COMMENT); printf("Started COMMENT\n"); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 78 "grace_lexer.l"
+#line 79 "grace_lexer.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 79 "grace_lexer.l"
+#line 80 "grace_lexer.l"
 { }
 	YY_BREAK
 case 33:
 /* rule 33 can match eol */
 YY_RULE_SETUP
-#line 80 "grace_lexer.l"
+#line 81 "grace_lexer.l"
 { lineno++; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 82 "grace_lexer.l"
+#line 83 "grace_lexer.l"
 { BEGIN(SINGLE_COMMENT); printf("Started SINGLE_COMMENT\n"); }
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 83 "grace_lexer.l"
+#line 84 "grace_lexer.l"
 { BEGIN(INITIAL); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 84 "grace_lexer.l"
+#line 85 "grace_lexer.l"
 { }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 86 "grace_lexer.l"
+#line 87 "grace_lexer.l"
 { printf("Error illegal character: %s (line %d)\n", yytext, lineno); exit(1); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 88 "grace_lexer.l"
+#line 89 "grace_lexer.l"
 ECHO;
 	YY_BREAK
-#line 1016 "grace.c"
+#line 1017 "grace.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT):
 case YY_STATE_EOF(SINGLE_COMMENT):
@@ -2019,7 +2020,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 88 "grace_lexer.l"
+#line 89 "grace_lexer.l"
 
 
 // int main() {
