@@ -7,3 +7,6 @@ if x then
     x=5
 else
     x=6
+
+while x do
+p = 5 + x

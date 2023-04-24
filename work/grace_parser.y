@@ -7,32 +7,34 @@ int yylex();
 
 %}
  
-%token T_and    
-%token T_char   
-%token T_div    
-%token T_do     
-%token T_else   
-%token T_fun    
-%token T_if     
-%token T_int    
-%token T_mod    
-%token T_not    
-%token T_nothing
-%token T_or     
-%token T_ref    
-%token T_return 
-%token T_then   
-%token T_var    
-%token T_while 
-%token T_id
-%token T_num 
-%token T_spacers  
-%token T_string   
-%token T_character
-%token T_symb_oper
+%token T_and       "and"
+%token T_char      "char"
+%token T_div       "div"
+%token T_do        "do"
+%token T_else      "else"   
+%token T_fun       "fun"    
+%token T_if        "if"    
+%token T_int       "int"    
+%token T_mod       "mod"    
+%token T_not       "not"    
+%token T_nothing   "nothing"
+%token T_or        "or"     
+%token T_ref       "ref"    
+%token T_return    "return"
+%token T_then      "then"
+%token T_var       "var"    
+%token T_while     "while" 
+%token T_id        "id"
+%token T_num       "num"
+%token T_spacers   "spaces"
+%token T_string    "string"
+%token T_character "character"
+%token T_symb_oper "symb_oper"
 
 %start stmts
 %expect 1
+%left '+' '-'
+%left '*' '/'
 %%
 
 stmts  : stmts stmt
@@ -41,38 +43,32 @@ stmts  : stmts stmt
 
 stmt   : decl 
        | variable '=' expr
-       | T_if expr T_then stmt
-       | T_if expr T_then stmt T_else stmt
-       | T_while expr T_do stmt
-       | T_return expr
+       | "if" expr "then" stmt
+       | "if" expr "then" stmt "else" stmt
+       | "while" expr "do" stmt
+       | "return" expr
        ;
 
-decl   : T_var variable ':' type ';'
+decl   : "var" variable ':' type ';'
        | variable
        ;
 
-type   : T_int '[' T_num ']'
-       | T_char '[' T_num ']'
-       | T_int
-       | T_char
+type   : "int" '[' T_num ']'
+       | "char" '[' T_num ']'
+       | "int"
+       | "char"
        ;
 
-variable : T_id ',' variable
-         | T_id
+variable : "id" ',' variable
+         | "id"
          ;
 
-expr   : expr '+' factor
-       | expr '-' factor
-       | factor
-       ;
-    
-factor : factor '*' term
-       | factor '/' term
-       | term
-       ;
-
-term   : T_id
-       | T_num
+expr   : expr '+' expr
+       | expr '-' expr
+       | expr '*' expr
+       | expr '/' expr
+       | "id"
+       | "num"
        | '(' expr ')'
        ;
 %%
