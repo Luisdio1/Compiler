@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "grace_parser.tab.h"
 
-// #define T_eof       0
 // #define T_and       1001
 // #define T_char      1002
 // #define T_div       1003
@@ -58,7 +57,7 @@ d           [0-9]
 "var"                       { return T_var; }
 "while"                     { return T_while; }
 
-[():{};\[\],]               { return T_spacers; }
+[():{};\[\],]               { return yytext[0]; }
 "<-"                        { return T_spacers; }
 
 \"(\\.|[^\n"\\])*\"         { return T_string; }
@@ -67,7 +66,7 @@ d           [0-9]
 "<>"                        { return T_symb_oper; }
 "<="                        { return T_symb_oper; }
 ">="                        { return T_symb_oper; }
-[=+\-*/()><#]               { return T_symb_oper; }
+[=+\-*/><#]                 { return yytext[0]; }
 
 {l}[a-zA-Z0-9_]*            { return T_id; }
 {d}+                        { return T_num; }

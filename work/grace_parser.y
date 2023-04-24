@@ -6,8 +6,7 @@ void yyerror(const char *msg);
 int yylex();
 
 %}
-
-%token T_eof   
+ 
 %token T_and    
 %token T_char   
 %token T_div    
@@ -31,13 +30,44 @@ int yylex();
 %token T_string   
 %token T_character
 %token T_symb_oper
+
+%start stmts
+%expect 1
 %%
 
-expr : expr '+' factor
-     | factor
-     ;
+stmts  : stmts stmt
+       | stmt
+       ;
+
+stmt   : decl 
+       | variable '=' expr
+       | T_if expr T_then stmt
+       | T_if expr T_then stmt T_else stmt
+       | T_while expr T_do stmt
+       | T_return expr
+       ;
+
+decl   : T_var variable ':' type ';'
+       | variable
+       ;
+
+type   : T_int '[' T_num ']'
+       | T_char '[' T_num ']'
+       | T_int
+       | T_char
+       ;
+
+variable : T_id ',' variable
+         | T_id
+         ;
+
+expr   : expr '+' factor
+       | expr '-' factor
+       | factor
+       ;
     
 factor : factor '*' term
+       | factor '/' term
        | term
        ;
 
