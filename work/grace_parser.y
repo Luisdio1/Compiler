@@ -49,6 +49,10 @@ stmt   : decl
        | "return" expr
        ;
 
+decls  : decls decl
+       | decl
+       ;
+
 decl   : "var" variable ':' type ';'
        | variable
        ;
