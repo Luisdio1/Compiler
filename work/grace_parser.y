@@ -31,15 +31,90 @@ int yylex();
 %token T_character "character"
 %token T_symb_oper "symb_oper"
 
-%start stmts
+%start program
 %expect 1
 %left '+' '-'
 %left '*' '/'
 %%
 
-stmts  : stmts stmt
-       | stmt
-       ;
+program : func_def ;
+
+func_def : header local_defs block ;
+
+header : "fun" "id" "(" fpar_defs ")" ":" ret_type ;
+
+fpar_defs : fpar_def ";" fpar_defs
+          | fpar_def
+          ;
+
+fpar_def : "ref" "id" ids ":" fpar_type
+         | "id" ids ":" fpar_type
+         | /* empty */    
+         ;
+
+ids      : "," "id" ids
+         | /* empty */
+
+data_type : "int" 
+          | "char"
+          ;
+
+type : data_type int_consts ; 
+
+int_consts : /* empty */
+           | int_consts "[" "num" "]"
+           | "[" "num" "]"
+           ;
+
+ret_type : data_type
+         | "nothing"
+         ;
+
+fpar_type : data_type "[" "]" int_consts
+          | data_type int_consts
+          ;
+
+
+local_defs : local_defs local_def
+           | local_def
+           ;
+
+local_def : func_def
+          | func_decl
+          | var_def
+          | /* empty */
+          ;
+
+func_decl : header ";"
+          ;
+
+var_def : "var" "id" ids ":" type ";"
+        ;
+
+stmts : stmts stmt
+      | stmt
+      ;
+
+stmt : ";"
+     | l-value "<-" expr ";"
+     | block
+     |func_call ";"
+     | "if" cond "then" stmt "else" stmt
+     | "if" cond "then" stmt
+     | "while" cond "do" stmt
+     | "return" expr ";"
+     | "return" ";"
+     | /* empty */
+     ;
+
+block : "{" stmts "}"
+
+
+
+
+// stmts  : stmts stmt
+//        | stmt
+//        ;
 
 stmt   : decl 
        | variable '=' expr
