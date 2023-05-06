@@ -11,13 +11,19 @@ we create an object file named **grace.o**, to link it with the **grace_parser.t
 
 ### **IMPORTANT**: If you want to use grace.c (to test the tokenizing, with **./grace**), make sure that the **main()** in grace_lexer.l is not commented out. It's, by default, commented out, because the linker doesn't work if the two object files have both a main().
 
-## To simply compile the parser, run:
+## To simply compile the parser, use the make file, by running:
+```
+make
+```
+(**It throws warnings**)
+
+## or run:
 ```
 gcc grace_parser.tab.c grace.c utils.c -o grace_parser
 ```
-## and then execute it with:
+## and then execute it with: ('parsertest.mbl' is a test file)
 ```
-./grace_parser
+./grace_parser < parsertest.mbl
 ```
 
 # More detailed guide
