@@ -15,7 +15,7 @@ we create an object file named **grace.o**, to link it with the **grace_parser.t
 ```
 make
 ```
-(**It throws warnings**)
+(**It throws warnings for the string literals ("var", "id" etc.)**)
 
 ## or run:
 ```

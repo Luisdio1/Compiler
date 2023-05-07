@@ -26,7 +26,7 @@ int yylex();
 %token T_while     "while" 
 %token T_id        "id"
 %token T_num       "num"
-%token T_spacers   "spacers"
+%token T_spacers   "<-"
 %token T_string    "string"
 %token T_character "character"
 %token T_NE        "not_equal"
@@ -50,7 +50,8 @@ func_def : header local_defs block ;
 header : "fun" "id" '(' fpar_defs ')' ':' ret_type ;
 
 fpar_defs : fpar_def ';' fpar_defs
-          | 
+          | fpar_def
+          |
           ;
 
 fpar_def : "ref" ids ':' fpar_type
@@ -67,8 +68,8 @@ data_type : "int"
 
 type : data_type int_consts ; 
 
-int_consts :
-           | int_consts '[' "num" ']'
+int_consts : int_consts '[' "num" ']'
+           | 
            ;
 
 ret_type : data_type
@@ -107,8 +108,8 @@ stmt : ';'
      | l_value "<-" expr ';'
      | block
      | func_call ';'
-     | "if" cond "then" stmt "else" stmt
      | "if" cond "then" stmt
+     | "if" cond "then" stmt "else" stmt
      | "while" cond "do" stmt
      | "return" expr ';'
      | "return" ';'
@@ -134,14 +135,14 @@ expr : "num"
      | expr '+' expr
      | expr '-' expr
      | expr '*' expr
-     | expr T_div expr
-     | expr T_mod expr
+     | expr "div" expr
+     | expr "mod" expr
      ;
 
 cond : '(' cond ')'
-     | T_not cond
-     | cond T_and cond
-     | cond T_or cond
+     | "not" cond
+     | cond "and" cond
+     | cond "or" cond
      | expr '=' expr
      | expr '#' expr
      | expr '<' expr
@@ -150,44 +151,6 @@ cond : '(' cond ')'
      | expr T_GE expr
      ;
 
-// stmts  : stmts stmt
-//        | stmt
-//        ;
-
-// stmt   : decl 
-//        | variable '=' expr
-//        | "if" expr "then" stmt
-//        | "if" expr "then" stmt "else" stmt
-//        | "while" expr "do" stmt
-//        | "return" expr
-//        ;
-
-// decls  : decls decl
-//        | decl
-//        ;
-
-// decl   : "var" variable ':' type ';'
-//        | variable
-//        ;
-
-// type   : "int" '[' T_num ']'
-//        | "char" '[' T_num ']'
-//        | "int"
-//        | "char"
-//        ;
-
-// variable : "id" ',' variable
-//          | "id"
-//          ;
-
-// expr   : expr '+' expr
-//        | expr '-' expr
-//        | expr '*' expr
-//        | expr '/' expr
-//        | "id"
-//        | "num"
-//        | '(' expr ')'
-//        ;
 %%
 
 int main() {

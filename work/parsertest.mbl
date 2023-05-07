@@ -1,12 +1,5 @@
-var i,j : int;
-var p   : char[50];
-
-x = (3+2)+4*(4-1)
-
-if x then
-    x=5
-else
-    x=6
-
-while x do
-p = 5 + x
+fun hello():nothing
+var i: int;
+{
+    
+}
