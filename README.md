@@ -2,29 +2,15 @@
 
 We're building a compiler for our new language, named Grace, using Flex and Bison.
 
-The file we create, for our lexical analysis rules, is named **grace_lexer.l**, and then with flex we create the **grace.c** file.
-It's then compiled, using **gcc**, creating the **grace** executable file. This file is used to check the lexical analysis, which is the process of breaking down the input source code into a sequence of tokens. Each token represents a meaningful sequence of characters, such as keywords, identifiers, constants and operators.
-
-We create the **grace.c** file, only to test the lexical analysis rules. Otherwise, as you will se later,
-we create an object file named **grace.o**, to link it with the **grace_parser.tab.o**.
-
-
-### **IMPORTANT**: If you want to use grace.c (to test the tokenizing, with **./grace**), make sure that the **main()** in grace_lexer.l is not commented out. It's, by default, commented out, because the linker doesn't work if the two object files have both a main().
-
 ## To simply compile the parser, use the make file, by running:
 ```
 make
 ```
 (**It throws warnings for the string literals ("var", "id" etc.)**)
 
-## or run:
-```
-gcc grace_parser.tab.c grace.c utils.c -o grace_parser
-```
-## and then execute it with: ('parsertest.mbl' is a test file)
-```
-./grace_parser < parsertest.mbl
-```
+It creates an executable file **grace_parser**, which you can execute to test any file for its grammar.
+
+### **IMPORTANT**: If you want to use grace.c (to test the tokenizing, with **./grace**), make sure that the **main()** in grace_lexer.l is not commented out. It's, by default, commented out, because the linker doesn't work if the two object files have both a main().
 
 # More detailed guide
 
@@ -45,15 +31,20 @@ gcc grace.c -o grace
 
 ## For example:
 ```
-./grace ../Grace_Examples/Hello.gra
+./grace ~/Grace_Examples/Hello.gra
 ```
 
 ## Now for the Syntax Analysis:
 We create the **grace_parser.y** file, that contains the rules for the Syntax Analysis.
-We create the **grace_parser.tab.c** file, we run
+We create the **grace_parser.tab.c** and **grace_parser.tab.h** files with **bison** 
 ```
-bison grace_parser.y
+bison -d grace_parser.y
 ```
+or
+```
+bison -H grace_parser.y
+```
+
 
 We cannot compile it yet, because it will complain for the missing yylex(),
 so we create the object file **grace_parser.tab.o** and we link it with **grace.o**.
@@ -67,6 +58,6 @@ gcc -c grace.c
 
 ## Linking them:
 ```
-gcc grace_parser.tab.o grace.o -o grace_parser
+gcc grace_parser.tab.o grace.o utils.c -o grace_parser
 ```
 (**If only grace_parser.y has a main(), the linking will work**)
