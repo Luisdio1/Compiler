@@ -63,9 +63,9 @@ d           [0-9]
 \"(\\.|[^\n"\\])*\"         { return T_string; }
 \'(\\.|[^\n'\\])\'?         { return T_character; }
 
-"<>"                        { return T_symb_oper; }
-"<="                        { return T_symb_oper; }
-">="                        { return T_symb_oper; }
+"<>"                        { return T_NE; }
+"<="                        { return T_LE; }
+">="                        { return T_GE; }
 [=+\-*/><#]                 { return yytext[0]; }
 
 {l}[a-zA-Z0-9_]*            { return T_id; }
